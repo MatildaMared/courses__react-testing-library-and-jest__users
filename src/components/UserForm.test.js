@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import UserForm from "./UserForm";
 
@@ -33,5 +33,23 @@ describe("UserForm component", () => {
 			name: "Anna",
 			email: "anna@gmail.com",
 		});
+	});
+
+	it("empties the inputs whenever the user clicks the submit button", async () => {
+		render(<UserForm addUser={() => {}} />);
+
+		const name = "Lars";
+		const email = "lars@gmail.com";
+
+		const nameInput = screen.getByLabelText(/name/i);
+		const emailInput = screen.getByLabelText(/email/i);
+		const button = screen.getByRole("button");
+
+		user.type(nameInput, name);
+		user.type(emailInput, email);
+		user.click(button);
+
+		expect(nameInput).toHaveValue("");
+		expect(emailInput).toHaveValue("");
 	});
 });

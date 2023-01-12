@@ -8,6 +8,8 @@ export default function UserForm({ addUser }) {
 		e.preventDefault();
 
 		addUser({ name, email });
+		setName("");
+		setEmail("");
 	}
 
 	return (

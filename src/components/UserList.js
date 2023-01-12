@@ -1,11 +1,22 @@
 export default function UserList({ users }) {
+	const renderedUsers = users.map((user) => {
+		return (
+			<tr key={user.id}>
+				<td>{user.name}</td>
+				<td>{user.email}</td>
+			</tr>
+		);
+	});
+
 	return (
-		<ul>
-			{users.map((user, index) => (
-				<li key={index}>
-					{user.name} - {user.email}
-				</li>
-			))}
-		</ul>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>{renderedUsers}</tbody>
+		</table>
 	);
 }
